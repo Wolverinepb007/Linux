@@ -1,0 +1,233 @@
+#!/bin/bash
+name=$1
+Lid=$2
+if [ $# != 2 ] #checking if the user entered the first name and 
+LondonID or not.
+ then
+ echo "Parameters not fulfilled!"
+ figlet "Try Again!"
+ exit
+ echo
+fi
+if ! [[ "$1" =~ [Aa-Zz]+$ ]] || ! [[ "$2" =~ ^[+-]?[0-9]+$ ]] 
+#Validating first name and LondonID
+then
+ echo "Invalid Input! First Name must be a string and LondonID must be 
+an Integer."
+ exit
+elif ! [[ "$name" =~ [Aa-Zz]+$ ]]
+then
+ echo "Invalid Input! First Name must be a String."
+ exit
+elif ! [[ "$2" =~ ^[+-]?[0-9]+$ ]] #Checking if the LondonID entered by 
+the user is integer or not.
+then
+ echo "Your LondonID must be an Integer!"
+ exit
+fi
+echo
+echo -e 'Enter the name of Program: \c'
+read program
+secretkey=007 #Defining the secret to be input by the user in order 
+to run the program further.
+count=0
+key=000
+until [ "$secretkey" = "$key" ] #Checking if the secret key entered 
+by the user is correct or not.
+do
+ ((count++))
+if [ $count -gt 4 ]
+then
+ echo
+ echo -e "\t\t\tSecret Key Incorrect!"
+ echo
+exit
+fi
+echo
+echo -e "Enter the Secret Key:-\c" #Asking the user to enter the 
+secret key.
+read key
+done
+figlet " Welcome !!" #Displaying the welcome message.
+echo -e "\t_____________________________________________________________" 
+#Dsiplaying first name, london Id entered by the user with date.
+echo
+echo -e "\t Program:-$program"
+echo -e "\t First Name:-$1"
+echo -e "\t LondonID:-$2"
+echo -e "\t Date:-$(date)"
+echo -e "\t_____________________________________________________________"
+function repeat(){ #Creating a main function which 
+includes other functions of the program.
+echo
+echo -e "\t---------------------------------------------------"
+echo -e "\t| Country Name | Country Code |"
+echo -e "\t---------------------------------------------------"
+echo -e "\t| Brazil | BRZ |"
+echo -e "\t| Argentina | ARG |"
+echo -e "\t| Nepal | NEP |"
+echo -e "\t| China | CHI |"
+echo -e "\t| England | ENG |"
+echo -e "\t---------------------------------------------------"
+function best(){ #Creating a function to select the 
+best football team by the user.
+echo
+echo -e "Enter the Country Code of the best football team:-\c"
+read code
+echo
+}
+best=BRZ
+code=yoh
+until [ "$code" == "$best" ]
+do
+ best
+if [ "$code" == "$best" ] #Checking if the user selected the 
+correct besr football team or not.
+then
+ echo "Congratulation! You choose the best team and here are some 
+details of the team. "
+ echo
+ echo -e "\t\tSome Details of Brazil's football team:"
+ echo -e "\t\t---------------------------------------"
+ echo
+ echo -e "Brazil's national football team has won over five FIFA World 
+Cup titles, more than any other nation in the world (in 1958, 1962, 1970, 
+1994 and 2002).
+Brazil is also the only country to qualify for every FIFA World Cup and the 
+only country with the most goals scored of all time – quite the 
+accomplishments!"
+elif [ "$code" == "ARG" ] || [ "$code" == "NEP" ] || [ "$code" == "CHI" ] || 
+[ "$code" == "ENG" ]
+then
+ echo "Sorry! $code is not the best team."
+ echo
+else
+ echo "Code Invalid! Please select a the code listed on the above 
+table."
+ echo
+fi
+done
+echo
+function players() #Creating a function for entering the 
+player's code and displaying their details.
+{
+echo -e "\t--------------------------------------------------"
+echo -e "\t| Player Name | Player Code |"
+echo -e "\t--------------------------------------------------"
+echo -e "\t| Lionel Messi | LM |"
+echo -e "\t| Neymar Junior | NJ |"
+echo -e "\t| Kiran Chemjong | KC |"
+echo -e "\t| Zheng Zhi | ZZ |"
+echo -e "\t| Harry Kane | HK |"
+echo -e "\t--------------------------------------------------"
+echo
+players=( 'LM' 'NJ' 'KC' 'ZZ' 'HK' )
+while :
+do
+ echo -e "Choose any three players and enter their codes: \c"
+ read player1 player2 player3
+ if [[ "$player1" == "$player2" || "$player2" == "$player3" || 
+"$player1" == "$player3" ]] #Checking if the user entered the Player 
+Code in valid format or not.
+ then
+ echo "Invalid Input! Players must be unique."
+ echo
+ elif [[ -z $player1 || -z $player2 || -z $player3 ]]
+ then
+ echo "Invalid Input! Please enter three codes of players 
+listed in the table, separated by space."
+ echo
+ elif [ ${#player3} != 2 ]
+ then
+ echo "Invalid Input! Please enter only three player codes."
+ else
+ break
+ fi
+done
+PS3="Choose a Player: "
+select PLAYER in $player1 $player2 $player3 #Selecting a player 
+by the user and display the player's details.
+ do
+ if [ -z "$PLAYER" ] #Checking the user's 
+selection to display corresponding out.
+ then
+ echo
+echo "Invalid Input! Please try again:"
+echo
+ continue
+ elif [[ "$PLAYER" == "LM" ]]
+ then
+ echo -e 'Fetching.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+echo '.'
+ cat LM
+ elif [[ "$PLAYER" == "NJ" ]]
+ then
+ echo -e 'Fetching.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+ echo -e '.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+echo '.'
+cat NJ
+ elif [[ "$PLAYER" == "KC" ]]
+ then
+ echo -e 'Fetching.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+ echo -e '.\c'
+ sleep 1
+echo -e '.\c'
+ sleep 1
+echo '.'
+ cat KC
+ elif [[ "$PLAYER" != "LM" && "$PLAYER" != "NJ" && "$PLAYER"
+!= "KC" ]]
+ then
+ echo
+echo "File Not Found! Please select either 
+LM, NJ, KC."
+ echo
+echo -e "Redirecting to step 4.\c"
+ echo
+players
+ fi
+ break
+ done
+}
+}
+function continuous(){ #Creating a function to ask if the user wants 
+to continue the program.
+echo
+echo -e "Do you again want to repeat the process (Y/N) :-\c"
+read ans
+case $ans in #Checking if the user wants to continue or not
+Y|y)
+repeat
+players
+continuous
+;;
+N|n)
+echo
+figlet " Program Terminated!"
+exit #Terminating the program.
+;;
+*)
+echo "Invalid Option"
+continuous
+;;
+esac
+}
+repeat #Calling the repeat function
+players #Calling the players function
+continuous #Calling the continuous functio
